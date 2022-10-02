@@ -8,13 +8,14 @@ class buildEnvironment:
         self.pointCloud = []
         self.mapImage = pygame.image.load('image.png')
         self.mapHeight, self.mapWidth = MapDimensions
-        self.mapWindowName = "RRT Path Planning"
+        self.mapWindowName = "SLAM"
 
         pygame.display.set_caption(self.mapWindowName)
 
         self.map = pygame.display.set_mode((self.mapWidth, self.mapHeight))
         self.map.blit(self.mapImage, (0,0))
 
+        # colors
         self.color_black = (0,0,0)
         self.color_grey = (70,70,70)
         self.color_blue = (0,0,255)

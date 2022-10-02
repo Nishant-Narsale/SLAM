@@ -43,7 +43,7 @@ while not done:
         # drawing point cloud data to map
         envi.printMap()
     
-    envi.map.blit(envi.originalMap, (0,0))
+    envi.map.blit(envi.outputMap, (0,0))
         
 
     pygame.display.update()

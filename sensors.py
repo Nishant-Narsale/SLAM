@@ -20,6 +20,10 @@ def add_uncertainity_to_sensor_data(distance, angle, sigma):
     # function to get random values from distribution using mean and variance
     distance, angle = np.random.multivariate_normal(mean, variance)
 
+    # excluding negative values
+    distance = max(distance,0)
+    angle = max(angle, 0)
+
     return [distance, angle]
 
 
@@ -69,7 +73,7 @@ class Laser:
         for angle in np.linspace(0, 2*math.pi, 60, False):
             # determinig range line end using Range and angle of Lidar
             x2 = (x1 + self.Range * math.cos(angle))
-            y2 = (y1 + self.Range * math.sin(angle))
+            y2 = (y1 - self.Range * math.sin(angle))
 
             # Now we are gonna divide line into 100 parts and check whether there is black color in any part on line
             # interpolation loop
@@ -84,7 +88,7 @@ class Laser:
                     # pygame function to get the color at given position on surface
                     color = self.map.get_at((x,y))
                     print(color)
-                    if (color[0], color[1], color[2] == (0,0,0)): #if color is black
+                    if (color[0], color[1], color[2]) == (0,0,0): #if color is black
                         distance_from_robot = self.disance((x,y))
                         output = add_uncertainity_to_sensor_data(distance_from_robot, angle, self.sigma)
                         # appending position of robot to output
@@ -96,7 +100,7 @@ class Laser:
         if len(data)>0:
             return data
         else:
-            return False
+            return []
 
 
 
