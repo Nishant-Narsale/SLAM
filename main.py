@@ -36,7 +36,7 @@ while not done:
 
         # getting sensed obstacles in range
         sensor_data = laser.sense_obstacle()
-        print('sensor data : ' , sensor_data)
+        # print('sensor data : ' , sensor_data)
         # this will store point cloud data in envi.pointCloud
         envi.dataStorage(sensor_data)
 
